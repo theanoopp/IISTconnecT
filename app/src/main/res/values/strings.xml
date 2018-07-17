@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">IISTconnecT</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+
+
+
+
+    <string name="title_activity_student_timetable">StudentTimetable</string>
+    <string name="title_activity_all_assignments">AllAssignments</string>
+    <string name="title_activity_assignments_by_subject">AssignmentsBySubject</string>
+    <string name="title_activity_view_assignment">ViewAssignment</string>
+
+    <string name="title_activity_gallery">GalleryActivity</string>
+    <string name="title_activity_notes">Notes</string>
+    <string name="title_activity_browse_notes">Notes</string>
+    <string name="title_activity_syllabus">Syllabus</string>
+    <string name="title_activity_home">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="action_settings">Settings</string>
+
+
+</resources>

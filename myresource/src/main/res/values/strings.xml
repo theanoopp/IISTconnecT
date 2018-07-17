@@ -1,0 +1,177 @@
+<resources>
+    <string name="app_name">MyResource</string>
+    <string name="title_activity_gallery">Gallery</string>
+
+
+    <string name="title_activity_submit_notes">SubmitNotesActivity</string>
+
+    <string-array name="registration_branch">
+
+        <item>Computer Science</item>
+        <item>Mechanical</item>
+        <item>Civil</item>
+        <item>Information Technology</item>
+        <item>Chemical</item>
+        <item>Electronic and Communication</item>
+
+    </string-array>
+
+    <string-array name="branch">
+
+        <item>Select Branch</item>
+        <item>Computer Science</item>
+        <item>Mechanical</item>
+        <item>Civil</item>
+        <item>Information Technology</item>
+        <item>Chemical</item>
+        <item>Electronic and Communication</item>
+
+    </string-array>
+
+
+    <string-array name="semester">
+
+        <item>Select Semester</item>
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+        <item>VI</item>
+        <item>VII</item>
+        <item>VIII</item>
+
+    </string-array>
+
+    <string-array name="time_slots">
+
+        <item>Select Time slot</item>
+        <item>08.50–09.50</item>
+        <item>09.50–10.50</item>
+        <item>10.50–11.50</item>
+        <item>11.50–12.40</item>
+        <item>12.40–01.30</item>
+        <item>01.30–02.30</item>
+        <item>02.30–03.30</item>
+        <item>03.30–04.20</item>
+
+    </string-array>
+
+
+    <string-array name="select_class">
+
+        <item>Select Section</item>
+
+    </string-array>
+
+    <string-array name="cs_class">
+
+        <item>Select Section</item>
+        <item>CS1</item>
+        <item>CS2</item>
+        <item>CS3</item>
+        <item>CS4</item>
+
+    </string-array>
+
+    <string-array name="me_class">
+
+        <item>Select Section</item>
+        <item>ME1</item>
+        <item>ME2</item>
+        <item>ME3</item>
+        <item>ME4</item>
+
+    </string-array>
+
+    <string-array name="ce_class">
+
+        <item>Select Section</item>
+        <item>CE1</item>
+        <item>CE2</item>
+        <item>CE3</item>
+        <item>CE4</item>
+
+    </string-array>
+
+    <string-array name="it_class">
+
+        <item>Select Section</item>
+        <item>IT1</item>
+        <item>IT2</item>
+        <item>IT3</item>
+        <item>IT4</item>
+
+    </string-array>
+
+
+    <string-array name="cm_class">
+
+        <item>Select Section</item>
+        <item>CM1</item>
+        <item>CM2</item>
+        <item>CM3</item>
+        <item>CM4</item>
+
+    </string-array>
+
+    <string-array name="ec_class">
+
+        <item>Select Section</item>
+        <item>EC1</item>
+        <item>EC2</item>
+        <item>EC3</item>
+        <item>EC4</item>
+
+    </string-array>
+
+    <string-array name="notes_branch">
+
+        <item>Select Branch</item>
+
+        <item>Common</item>
+        <item>Computer Science</item>
+        <item>Mechanical</item>
+        <item>Civil</item>
+        <item>Information Technology</item>
+        <item>Chemical</item>
+        <item>Electronic and Communication</item>
+
+
+    </string-array>
+
+    <string-array name="notes_semester">
+
+        <item>Select Semester</item>
+        <item>Common</item>
+        <item>I</item>
+        <item>II</item>
+        <item>III</item>
+        <item>IV</item>
+        <item>V</item>
+        <item>VI</item>
+        <item>VII</item>
+        <item>VIII</item>
+
+    </string-array>
+
+    <string-array name="notes_sub">
+
+        <item>Select Subject</item>
+
+    </string-array>
+    <string name="title_activity_browse_notes">BrowseNotes</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_browse_syllabus">BrowseSyllabusActivity</string>
+
+
+</resources>

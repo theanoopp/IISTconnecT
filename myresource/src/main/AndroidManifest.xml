@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="in.rgpvnotes.alert.myresource">
+
+    <application>
+        <activity
+            android:name=".activities.GalleryActivity"
+            android:label="@string/title_activity_gallery"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SubmitNotesActivity"
+            android:label="@string/title_activity_submit_notes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.BrowseNotes"
+            android:label="@string/title_activity_browse_notes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.ViewSyllabusActivity" />
+        <activity
+            android:name=".activities.BrowseSyllabusActivity"
+            android:label="@string/title_activity_browse_syllabus"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

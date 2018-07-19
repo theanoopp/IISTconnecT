@@ -11,5 +11,9 @@ public class AddCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
+
+
+        // TODO: 19-07-2018 by anoop mehra
+
     }
 }

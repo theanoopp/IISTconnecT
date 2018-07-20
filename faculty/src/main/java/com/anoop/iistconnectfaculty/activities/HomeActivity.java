@@ -214,6 +214,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             startActivity(new Intent(HomeActivity.this,MyClasses.class));
 
+        }else if(id == R.id.nav_my_modules){
+
+            startActivity(new Intent(HomeActivity.this,ModulesActivity.class));
+
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

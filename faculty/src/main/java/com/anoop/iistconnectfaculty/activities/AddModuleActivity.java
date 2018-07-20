@@ -10,14 +10,11 @@ import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import com.anoop.iistconnectfaculty.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,8 +27,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 
-public class AddCourseActivity extends AppCompatActivity{
+
+public class AddModuleActivity extends AppCompatActivity{
 
     private Button startDateButton;
     private Button endDateButton;
@@ -56,6 +55,8 @@ public class AddCourseActivity extends AppCompatActivity{
 
     private Date startDate , endDate;
 
+    private MyProgressDialog dialog ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,8 @@ public class AddCourseActivity extends AppCompatActivity{
         setContentView(R.layout.activity_add_course);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        dialog = new MyProgressDialog(AddModuleActivity.this);
 
         startDateButton = findViewById(R.id.startDate);
 
@@ -126,7 +129,7 @@ public class AddCourseActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                DatePickerDialog dialog = new DatePickerDialog(AddCourseActivity.this, startDateDialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog = new DatePickerDialog(AddModuleActivity.this, startDateDialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
 
@@ -137,7 +140,7 @@ public class AddCourseActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
 
-                DatePickerDialog dialog = new DatePickerDialog(AddCourseActivity.this, endDateDialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
+                DatePickerDialog dialog = new DatePickerDialog(AddModuleActivity.this, endDateDialog,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
 
@@ -150,6 +153,12 @@ public class AddCourseActivity extends AppCompatActivity{
             public void onClick(View view) {
 
                 if(checkInput()){
+
+                    dialog.setTitle("Please wait...");
+                    dialog.setMessage("Creating...");
+                    dialog.setCancelable(false);
+
+                    dialog.show();
 
                     mSubmitButton.setEnabled(false);
 
@@ -171,14 +180,16 @@ public class AddCourseActivity extends AppCompatActivity{
                         @Override
                         public void onSuccess(Void aVoid) {
 
-                            Toast.makeText(AddCourseActivity.this, "Done", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddModuleActivity.this, "New Module created", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                            finish();
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
 
-                            Toast.makeText(AddCourseActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddModuleActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -203,10 +214,6 @@ public class AddCourseActivity extends AppCompatActivity{
         mBriefInput.setError(null);
 
         mLocationInput.setError(null);
-
-
-
-
 
         startDateButton.setTextSize(14);
 
@@ -238,7 +245,7 @@ public class AddCourseActivity extends AppCompatActivity{
 
         if(startDate == null){
 
-            Toast.makeText(AddCourseActivity.this, "Select start date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddModuleActivity.this, "Select start date", Toast.LENGTH_SHORT).show();
             startDateButton.setTextColor(Color.RED);
             result = false;
 
@@ -246,7 +253,7 @@ public class AddCourseActivity extends AppCompatActivity{
 
         if(endDate == null){
 
-            Toast.makeText(AddCourseActivity.this, "Select end date", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AddModuleActivity.this, "Select end date", Toast.LENGTH_SHORT).show();
             endDateButton.setTextColor(Color.RED);
             result = false;
 

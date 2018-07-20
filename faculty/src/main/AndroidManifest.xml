@@ -64,7 +64,8 @@
         <activity android:name=".activities.NewStudents" />
         <activity android:name=".activities.VerifyStudentActivity" />
         <activity android:name=".activities.Attendance" />
-        <activity android:name=".activities.AddCourseActivity"></activity>
+        <activity android:name=".activities.AddModuleActivity" />
+        <activity android:name=".activities.ModulesActivity"></activity>
     </application>
 
 </manifest>

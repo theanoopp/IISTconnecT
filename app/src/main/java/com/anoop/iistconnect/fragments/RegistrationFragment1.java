@@ -138,7 +138,8 @@ public class RegistrationFragment1 extends Fragment {
 
         enroll = enroll.toUpperCase();
 
-        boolean n = true, e = true ,p=true,c=true,radio=true;
+        boolean check = true;
+
 
         nameET.setError(null);
         emailET.setError(null);
@@ -149,11 +150,11 @@ public class RegistrationFragment1 extends Fragment {
 
         if(name.length()<3 ){
             nameET.setError("Enter valid name");
-            n = false;
+            check = false;
         }
         if(email.length()<3){
             emailET.setError("Enter valid Email");
-            e = false;
+            check = false;
         }
         if(enroll.length()!=12){
             enrollmentET.setError("Enter valid enrollment");
@@ -162,21 +163,21 @@ public class RegistrationFragment1 extends Fragment {
 
         if (pass.length() < 6) {
             passET.setError("password must be of minimum 6 character");
-            p = false;
+            check = false;
         }
 
         if (!pass.equals(cpass)) {
             cpassET.setError("password must be same");
-            c = false;
+            check = false;
         }
 
         if(radioGroup.getCheckedRadioButtonId() == -1){
-            radio = false;
+            check = false;
             Toast.makeText(getActivity(), "Please select your program", Toast.LENGTH_SHORT).show();//Set error to last Radio button
         }
 
 
-        return p && c && n && e && enrollCheck && radio;
+        return check && enrollCheck;
 
     }
 

@@ -187,13 +187,13 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
                     dialog.setTitle("Uploading image");
                     dialog.setMessage("Please wait while we make your account..");
 
-                    StorageReference storageReference = FirebaseStorage.getInstance().getReference("students_profile_photos").child(student_id);
+                    final StorageReference storageReference = FirebaseStorage.getInstance().getReference("students_profile_photos").child(student_id);
 
                     storageReference.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            photoUrl = taskSnapshot.getDownloadUrl().toString();
+                            photoUrl = storageReference.getDownloadUrl().toString();
                             model.setProfileImage(photoUrl);
                             updateDetails();
 

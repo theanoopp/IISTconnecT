@@ -210,7 +210,7 @@ public class AddAssignment extends AppCompatActivity implements DatePickerDialog
 
     private void uploadFiles() {
 
-        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("assignment_files").child(doc_id);
+        final StorageReference mStorageRef = FirebaseStorage.getInstance().getReference("assignment_files").child(doc_id);
 
         if(fileList.size()>0){
 
@@ -223,7 +223,7 @@ public class AddAssignment extends AppCompatActivity implements DatePickerDialog
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                        String downUrl = taskSnapshot.getDownloadUrl().toString();
+                        String downUrl = mStorageRef.getDownloadUrl().toString();
                         fileURLList.add(downUrl);
                         if(fileList.size() == fileURLList.size()){
 

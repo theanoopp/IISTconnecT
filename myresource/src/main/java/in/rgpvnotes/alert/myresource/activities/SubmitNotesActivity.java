@@ -299,7 +299,7 @@ public class SubmitNotesActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    String url = taskSnapshot.getDownloadUrl().toString();
+                    String url = mStorageRef.getDownloadUrl().toString();
 
                     map.put("fileUrl",url);
                     documentReference.set(map).addOnSuccessListener(SubmitNotesActivity.this, new OnSuccessListener<Void>() {

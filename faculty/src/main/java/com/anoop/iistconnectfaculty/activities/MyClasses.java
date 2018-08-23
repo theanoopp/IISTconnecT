@@ -151,7 +151,7 @@ public class MyClasses extends AppCompatActivity{
         private TextView subName;
         private TextView clsName;
         private TextView year;
-        private   View mView;
+        private View mView;
 
         private ViewHolder(View itemView) {
             super(itemView);

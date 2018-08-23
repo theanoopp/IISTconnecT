@@ -11,8 +11,8 @@ import com.anoop.iistconnectfaculty.ViewHolder.AttendanceViewHolder;
 
 import java.util.List;
 
-import in.rgpvnotes.alert.myresource.models.AttendanceModel;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.AttendanceModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceViewHolder> {
 

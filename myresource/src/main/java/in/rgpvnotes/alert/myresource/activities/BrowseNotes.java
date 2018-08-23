@@ -23,7 +23,7 @@ import in.rgpvnotes.alert.myresource.dialog.FilterNotesDialog;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.fragments.AllBranchFragment;
 import in.rgpvnotes.alert.myresource.fragments.BrowseNotesFragment;
-import in.rgpvnotes.alert.myresource.models.NotesModel;
+import in.rgpvnotes.alert.myresource.model.NotesModel;
 
 public class BrowseNotes extends AppCompatActivity implements AllBranchFragment.BranchSelectListener,FilterNotesDialog.SelectListener,BrowseNotesFragment.OnButtonClickListener {
 

@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.anoop.iistconnectfaculty.R;
 
-import in.rgpvnotes.alert.myresource.models.AttendanceModel;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.AttendanceModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class AttendanceViewHolder extends RecyclerView.ViewHolder  {
 

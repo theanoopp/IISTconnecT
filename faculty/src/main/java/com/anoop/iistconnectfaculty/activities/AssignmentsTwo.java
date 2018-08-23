@@ -26,8 +26,8 @@ import com.google.firebase.storage.StorageReference;
 import java.text.SimpleDateFormat;
 
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.AssignmentModel;
-import in.rgpvnotes.alert.myresource.models.MyClassModel;
+import in.rgpvnotes.alert.myresource.model.AssignmentModel;
+import in.rgpvnotes.alert.myresource.model.MyClassModel;
 
 public class AssignmentsTwo extends AppCompatActivity {
 

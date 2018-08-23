@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import in.rgpvnotes.alert.myresource.dialog.TimeSelectDialog;
-import in.rgpvnotes.alert.myresource.models.MyClassModel;
+import in.rgpvnotes.alert.myresource.model.MyClassModel;
 
 public class MyClasses extends AppCompatActivity{
 

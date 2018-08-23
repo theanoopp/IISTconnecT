@@ -35,7 +35,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class RegisterActivity extends AppCompatActivity implements RegistrationFragment1.RegistrationFragment1Listener,RegistrationFragment2.OnSubmitListener {
 
@@ -163,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
 
         String classId = section+"-"+b;
 
-        model = new StudentModel(name,email,branch,photoUrl,enroll,batch,"false",section,currentYear,classId,semester,program);
+        model = new StudentModel(name,email,branch,photoUrl,enroll,batch,"true",section,currentYear,classId,semester,program);
 
         registerStudent();
     }

@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import in.rgpvnotes.alert.myresource.dialog.SlideshowDialogFragment;
-import in.rgpvnotes.alert.myresource.models.AssignmentModel;
+import in.rgpvnotes.alert.myresource.model.AssignmentModel;
 import in.rgpvnotes.alert.myresource.models.PhotosModel;
 
 public class ViewAssignment extends AppCompatActivity implements ViewAssignmentAdapter.ItemClickListener  {

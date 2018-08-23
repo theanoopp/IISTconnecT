@@ -13,7 +13,7 @@ import com.anoop.iistconnectfaculty.R;
 
 import java.util.List;
 
-import in.rgpvnotes.alert.myresource.models.AssignmentFile;
+import in.rgpvnotes.alert.myresource.model.AssignmentFile;
 
 /**
  * Created by Anoop on 08-03-2018.

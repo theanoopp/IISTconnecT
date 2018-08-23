@@ -46,9 +46,9 @@ import java.util.Map;
 
 import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.TimeSelectDialog;
-import in.rgpvnotes.alert.myresource.models.AttendanceModel;
-import in.rgpvnotes.alert.myresource.models.MyClassModel;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.AttendanceModel;
+import in.rgpvnotes.alert.myresource.model.MyClassModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class Attendance extends AppCompatActivity {
 

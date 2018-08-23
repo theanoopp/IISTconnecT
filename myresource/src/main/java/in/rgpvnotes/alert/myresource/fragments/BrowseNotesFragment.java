@@ -25,7 +25,7 @@ import com.google.firebase.firestore.Query;
 import in.rgpvnotes.alert.myresource.R;
 import in.rgpvnotes.alert.myresource.ViewHolder.NotesViewHolder;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.NotesModel;
+import in.rgpvnotes.alert.myresource.model.NotesModel;
 
 
 public class BrowseNotesFragment extends Fragment {

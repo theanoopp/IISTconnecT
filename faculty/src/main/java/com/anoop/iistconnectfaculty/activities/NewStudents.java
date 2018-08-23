@@ -20,7 +20,7 @@ import com.google.firebase.firestore.Query;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.rgpvnotes.alert.myresource.Constants;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class NewStudents extends AppCompatActivity {
 

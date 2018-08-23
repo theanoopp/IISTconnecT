@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import in.rgpvnotes.alert.myresource.models.Module;
+import in.rgpvnotes.alert.myresource.model.Module;
 
 public class ModulesActivity extends AppCompatActivity {
 

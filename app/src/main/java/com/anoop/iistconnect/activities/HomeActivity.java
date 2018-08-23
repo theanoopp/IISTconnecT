@@ -34,8 +34,8 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.activities.GalleryActivity;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
-//this is new branch
+import in.rgpvnotes.alert.myresource.model.StudentModel;
+
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
     private FirebaseAuth mAuth;

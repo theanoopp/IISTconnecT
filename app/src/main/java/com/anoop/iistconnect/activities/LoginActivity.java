@@ -27,8 +27,6 @@ import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "Student_login";
-
     private TextInputLayout emailET,passET;
 
 
@@ -105,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
 
                             dialog.dismiss();
-                            Log.d(TAG,e.getMessage());
                             Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 
                         }
@@ -171,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(@NonNull Exception e) {
 
                 dialog.dismiss();
-                Log.d(TAG,e.getMessage());
                 Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 
 

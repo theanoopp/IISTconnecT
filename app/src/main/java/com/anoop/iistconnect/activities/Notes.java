@@ -47,7 +47,7 @@ import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.ViewHolder.NotesViewHolder;
 import in.rgpvnotes.alert.myresource.activities.BrowseNotes;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.NotesModel;
+import in.rgpvnotes.alert.myresource.model.NotesModel;
 
 public class Notes extends AppCompatActivity {
 

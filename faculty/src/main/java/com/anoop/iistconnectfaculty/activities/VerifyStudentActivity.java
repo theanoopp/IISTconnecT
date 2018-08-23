@@ -35,7 +35,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.StudentModel;
+import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class VerifyStudentActivity extends AppCompatActivity {
 

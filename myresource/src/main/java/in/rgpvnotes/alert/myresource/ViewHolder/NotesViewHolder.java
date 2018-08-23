@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import in.rgpvnotes.alert.myresource.R;
-import in.rgpvnotes.alert.myresource.models.NotesModel;
+import in.rgpvnotes.alert.myresource.model.NotesModel;
 
 /**
  * Created by Anoop on 11-03-2018.

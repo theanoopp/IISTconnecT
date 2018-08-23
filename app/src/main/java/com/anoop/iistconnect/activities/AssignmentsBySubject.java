@@ -21,7 +21,7 @@ import com.google.firebase.firestore.Query;
 
 import java.text.SimpleDateFormat;
 
-import in.rgpvnotes.alert.myresource.models.AssignmentModel;
+import in.rgpvnotes.alert.myresource.model.AssignmentModel;
 
 public class AssignmentsBySubject extends AppCompatActivity {
 

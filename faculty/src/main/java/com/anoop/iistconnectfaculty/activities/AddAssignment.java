@@ -49,8 +49,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.models.AssignmentFile;
-import in.rgpvnotes.alert.myresource.models.MyClassModel;
+import in.rgpvnotes.alert.myresource.model.AssignmentFile;
+import in.rgpvnotes.alert.myresource.model.MyClassModel;
 
 public class AddAssignment extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 

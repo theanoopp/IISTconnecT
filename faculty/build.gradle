@@ -87,6 +87,13 @@ dependencies {
     //curve layout
     implementation 'com.github.developer-shivam:Crescento:1.2.1'
 
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+
+    implementation 'com.google.zxing:core:3.3.2'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 
 }
 
@@ -100,3 +107,6 @@ dependencies {
 
 
 apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

@@ -123,7 +123,7 @@ public class ModulesActivity extends AppCompatActivity {
             super(itemView);
             mView = itemView;
             moduleName = itemView.findViewById(R.id.module_name);
-            courseBrief = itemView.findViewById(R.id.course_brief);
+            courseBrief = itemView.findViewById(R.id.courseBrief);
         }
 
         private void bind(Module module){

@@ -65,7 +65,10 @@
         <activity android:name=".activities.VerifyStudentActivity" />
         <activity android:name=".activities.Attendance" />
         <activity android:name=".activities.AddModuleActivity" />
-        <activity android:name=".activities.ModulesActivity"></activity>
+        <activity android:name=".activities.ModulesActivity" />
+        <activity android:name=".activities.ClassHomeActivity" />
+        <activity android:name=".activities.AddCourseActivity" />
+        <activity android:name=".activities.ViewCourseActivity"></activity>
     </application>
 
 </manifest>

@@ -147,7 +147,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View view) {
 
-        int id = view.getId();
 
         if(view.getId()==R.id.b_assignments){
 
@@ -206,17 +205,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(HomeActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK ));
             finish();
 
-        }else if(id == R.id.nav_new_student){
-
-            startActivity(new Intent(HomeActivity.this,NewStudents.class));
-
         }else if(id == R.id.nav_my_class){
 
-            startActivity(new Intent(HomeActivity.this,MyClasses.class));
-
-        }else if(id == R.id.nav_my_modules){
-
-            startActivity(new Intent(HomeActivity.this,ModulesActivity.class));
+            startActivity(new Intent(HomeActivity.this,ClassHomeActivity.class));
 
         }
 

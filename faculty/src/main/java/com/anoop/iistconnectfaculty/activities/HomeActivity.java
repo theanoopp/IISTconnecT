@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         if(view.getId()==R.id.b_assignments){
 
-            startActivity(new Intent(HomeActivity.this,MyClasses.class));
+            startActivity(new Intent(HomeActivity.this,ClassHomeActivity.class));
 
         }else if(view.getId()==R.id.b_timetable){
 

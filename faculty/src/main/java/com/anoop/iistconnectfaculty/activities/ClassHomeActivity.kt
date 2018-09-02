@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_class_home.*
 
 class ClassHomeActivity : AppCompatActivity() {
 
-    var adapter: FirestoreRecyclerAdapter<Course, ClassViewHolder>? = null
+    private var adapter: FirestoreRecyclerAdapter<Course, ClassViewHolder>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,8 +74,7 @@ class ClassHomeActivity : AppCompatActivity() {
             }
 
             override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.course_row, parent, false)
+                val view = LayoutInflater.from(parent.context).inflate(R.layout.course_row, parent, false)
                 return ClassViewHolder(view)
             }
         }
@@ -88,8 +87,8 @@ class ClassHomeActivity : AppCompatActivity() {
 
     class ClassViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-        private val clsName: TextView = view.findViewById(R.id.courseName)
-        private val batch: TextView = view.findViewById(R.id.courseBrief)
+        val clsName: TextView = view.findViewById(R.id.courseName)
+        val batch: TextView = view.findViewById(R.id.courseBrief)
 
         fun bind(course: Course) {
 

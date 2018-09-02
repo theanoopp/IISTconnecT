@@ -33,10 +33,6 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MyClasses"
-            android:label="@string/title_activity_assignments_one"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".activities.AssignmentsTwo"
             android:label="@string/title_activity_assignments_two"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -68,7 +64,7 @@
         <activity android:name=".activities.ModulesActivity" />
         <activity android:name=".activities.ClassHomeActivity" />
         <activity android:name=".activities.AddCourseActivity" />
-        <activity android:name=".activities.ViewCourseActivity"></activity>
+        <activity android:name=".activities.ViewCourseActivity"/>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@
 
 
     <item android:visible="true"
-        android:id="@+id/acton_attach_files"
         android:title="Attach files"
         android:icon="@drawable/ic_attachment"
         android:enabled="true"

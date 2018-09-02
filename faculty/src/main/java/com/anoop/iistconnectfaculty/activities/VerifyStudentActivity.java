@@ -219,7 +219,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
                 .call(data)
                 .continueWith(new Continuation<HttpsCallableResult, String>() {
                     @Override
-                    public String then(@NonNull Task<HttpsCallableResult> task) throws Exception {
+                    public String then(@NonNull Task<HttpsCallableResult> task) {
                         // This continuation runs on either success or failure, but if the task
                         // has failed then getResult() will throw an Exception which will be
                         // propagated down.

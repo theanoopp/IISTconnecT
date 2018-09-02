@@ -33,7 +33,6 @@
                 app:srcCompat="@drawable/cse_img" />
 
             <TextView
-                android:id="@+id/cse_t"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#920066e6"
@@ -79,7 +78,6 @@
                 app:srcCompat="@drawable/mech_img" />
 
             <TextView
-                android:id="@+id/me_t"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Mechanical"
@@ -125,7 +123,6 @@
                 app:srcCompat="@drawable/civil" />
 
             <TextView
-                android:id="@+id/n_civil"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Civil"
@@ -169,7 +166,6 @@
                 app:srcCompat="@drawable/it" />
 
             <TextView
-                android:id="@+id/l_it"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Information Technology"
@@ -216,7 +212,6 @@
                 app:srcCompat="@drawable/chemical" />
 
             <TextView
-                android:id="@+id/t_ch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#920066e6"
@@ -261,7 +256,6 @@
                 app:srcCompat="@drawable/extc" />
 
             <TextView
-                android:id="@+id/t_ec"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Electronic and Communication"
@@ -303,7 +297,6 @@
                 app:srcCompat="@drawable/others" />
 
             <TextView
-                android:id="@+id/t_others"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Other"

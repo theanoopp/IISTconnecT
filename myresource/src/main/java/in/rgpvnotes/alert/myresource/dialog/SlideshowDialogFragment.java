@@ -41,9 +41,9 @@ public class SlideshowDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.slide_show_dialog, container, false);
-        viewPager = (ViewPager) v.findViewById(R.id.viewpager);
+        viewPager = v.findViewById(R.id.viewpager);
 
-        lblCount = (TextView) v.findViewById(R.id.lbl_count);
+        lblCount = v.findViewById(R.id.lbl_count);
         //lblTitle = (TextView) v.findViewById(R.id.title);
         //lblDate = (TextView) v.findViewById(R.id.date);
 
@@ -135,7 +135,7 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         @Override
         public boolean isViewFromObject(View view, Object obj) {
-            return view == ((View) obj);
+            return view == obj;
         }
 
 

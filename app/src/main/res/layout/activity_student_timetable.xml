@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -34,37 +33,31 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mon" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Tue" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Wed" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thu" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fri" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sat" />

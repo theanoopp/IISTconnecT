@@ -25,7 +25,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <include
-        android:id="@+id/include2"
         layout="@layout/content_browse_syllabus"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -29,7 +29,6 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.activities.BrowseSyllabusActivity;
 import in.rgpvnotes.alert.myresource.activities.GalleryActivity;
 

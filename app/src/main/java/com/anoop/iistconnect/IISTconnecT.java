@@ -18,7 +18,6 @@ public class IISTconnecT extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        // Required initialization logic here!
 
         PRDownloader.initialize(getApplicationContext());
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);

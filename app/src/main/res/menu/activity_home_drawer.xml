@@ -10,6 +10,11 @@ tools:showIn="navigation_view">
         android:icon="@drawable/ic_menu_gallery"
         android:title="Gallery" />
 
+    <item
+        android:id="@+id/nav_my_classes"
+        android:icon="@drawable/ic_class"
+        android:title="My Classes" />
+
 </group>
 
 <item android:title="Communicate">

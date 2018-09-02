@@ -36,18 +36,16 @@ import com.google.firebase.firestore.Query;
 
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
-import com.downloader.OnProgressListener;
 import com.downloader.PRDownloader;
-import com.downloader.Progress;
 
 
 import java.io.File;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.ViewHolder.NotesViewHolder;
 import in.rgpvnotes.alert.myresource.activities.BrowseNotes;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.NotesModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class Notes extends AppCompatActivity {
 

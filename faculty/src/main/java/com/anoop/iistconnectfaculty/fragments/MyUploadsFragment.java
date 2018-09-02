@@ -25,9 +25,7 @@ import com.anoop.iistconnectfaculty.R;
 
 import com.downloader.Error;
 import com.downloader.OnDownloadListener;
-import com.downloader.OnProgressListener;
 import com.downloader.PRDownloader;
-import com.downloader.Progress;
 import com.downloader.Status;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -43,7 +41,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.ViewHolder.NotesViewHolder;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.NotesModel;

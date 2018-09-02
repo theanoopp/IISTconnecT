@@ -1,16 +1,11 @@
 package com.anoop.iistconnectfaculty.activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -33,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.StudentModel;
 

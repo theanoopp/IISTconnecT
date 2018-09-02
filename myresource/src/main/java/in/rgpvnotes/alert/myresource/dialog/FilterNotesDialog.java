@@ -23,10 +23,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.R;
 import in.rgpvnotes.alert.myresource.adapter.SubjectArrayAdapter;
 import in.rgpvnotes.alert.myresource.models.SubjectModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 /**
  * Created by Anoop on 26-03-2018.

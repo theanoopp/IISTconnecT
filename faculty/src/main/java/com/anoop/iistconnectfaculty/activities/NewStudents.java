@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.anoop.iistconnectfaculty.R;
 import com.bumptech.glide.Glide;
@@ -19,7 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.model.StudentModel;
 
 public class NewStudents extends AppCompatActivity {

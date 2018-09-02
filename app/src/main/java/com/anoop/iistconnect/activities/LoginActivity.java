@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,13 +21,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout emailET,passET;
-
 
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
@@ -142,15 +140,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(documentSnapshot.exists()) {
                     dialog.dismiss();
-
-                    String section = documentSnapshot.getString("section");
-                    String currentYear = documentSnapshot.getString("currentYear");
-
-                    char b = currentYear.charAt(0);
-                    section = section+"-"+b;
-
-                    FirebaseMessaging.getInstance().subscribeToTopic(section);
-
                     startActivity(new Intent(LoginActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK ));
                     finish();
 
@@ -159,7 +148,6 @@ public class LoginActivity extends AppCompatActivity {
                     dialog.dismiss();
                     Toast.makeText(getApplicationContext(),"No record found",Toast.LENGTH_SHORT).show();
                     mAuth.signOut();
-
                 }
 
             }

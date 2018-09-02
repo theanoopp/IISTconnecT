@@ -16,7 +16,6 @@ import com.anoop.iistconnectfaculty.R;
 import com.anoop.iistconnectfaculty.fragments.MyNotesFragment;
 import com.anoop.iistconnectfaculty.fragments.MyUploadsFragment;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.activities.BrowseNotes;
 import in.rgpvnotes.alert.myresource.activities.SubmitNotesActivity;
 

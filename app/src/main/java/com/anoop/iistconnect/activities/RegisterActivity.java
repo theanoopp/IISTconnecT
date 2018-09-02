@@ -33,9 +33,9 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class RegisterActivity extends AppCompatActivity implements RegistrationFragment1.RegistrationFragment1Listener,RegistrationFragment2.OnSubmitListener {
 

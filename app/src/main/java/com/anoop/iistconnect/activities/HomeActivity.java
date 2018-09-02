@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anoop.iistconnect.R;
+import com.anoop.iistconnect.utils.SessionManagement;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,9 +33,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.activities.GalleryActivity;
 import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 
@@ -127,6 +128,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     if (documentSnapshot.exists()) {
 
                         studentModel = documentSnapshot.toObject(StudentModel.class);
+
+                        SessionManagement.saveStudent(HomeActivity.this,studentModel);
+
                         if(studentModel.getVerified().equals("false")){
                             startActivity(new Intent(HomeActivity.this,AccountNotVerifiedActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK ));
                         }
@@ -198,7 +202,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
             startActivity(new Intent(HomeActivity.this,GalleryActivity.class));
 
-        }if (id == R.id.nav_share) {
+        }else if(id == R.id.nav_my_classes){
+
+            startActivity(new Intent(HomeActivity.this,MyClassesActivity.class));
+
+        } if (id == R.id.nav_share) {
 
             // TODO: 31-03-2018 share this app
 

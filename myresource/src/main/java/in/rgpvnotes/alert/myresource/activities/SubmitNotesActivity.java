@@ -8,8 +8,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -39,11 +37,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.rgpvnotes.alert.myresource.Constants;
 import in.rgpvnotes.alert.myresource.R;
 import in.rgpvnotes.alert.myresource.adapter.SubjectArrayAdapter;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.models.SubjectModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class SubmitNotesActivity extends AppCompatActivity {
 

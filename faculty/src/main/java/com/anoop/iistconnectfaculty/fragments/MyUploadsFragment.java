@@ -44,6 +44,7 @@ import java.io.File;
 import in.rgpvnotes.alert.myresource.ViewHolder.NotesViewHolder;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.NotesModel;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class MyUploadsFragment extends Fragment {
 

@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import in.rgpvnotes.alert.myresource.activities.BrowseSyllabusActivity;
 import in.rgpvnotes.alert.myresource.activities.GalleryActivity;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
 

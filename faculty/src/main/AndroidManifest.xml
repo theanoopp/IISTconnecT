@@ -64,7 +64,8 @@
         <activity android:name=".activities.ModulesActivity" />
         <activity android:name=".activities.ClassHomeActivity" />
         <activity android:name=".activities.AddCourseActivity" />
-        <activity android:name=".activities.ViewCourseActivity"/>
+        <activity android:name=".activities.ViewCourseActivity" />
+        <activity android:name=".activities.ViewAttendanceActivity"></activity>
     </application>
 
 </manifest>

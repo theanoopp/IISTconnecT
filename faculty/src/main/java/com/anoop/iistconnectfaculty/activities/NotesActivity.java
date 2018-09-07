@@ -18,6 +18,7 @@ import com.anoop.iistconnectfaculty.fragments.MyUploadsFragment;
 
 import in.rgpvnotes.alert.myresource.activities.BrowseNotes;
 import in.rgpvnotes.alert.myresource.activities.SubmitNotesActivity;
+import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class NotesActivity extends AppCompatActivity implements MyNotesFragment.MyNotesListener,MyUploadsFragment.MyUploadsListener {
 

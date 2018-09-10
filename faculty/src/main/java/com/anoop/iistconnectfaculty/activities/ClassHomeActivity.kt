@@ -63,6 +63,9 @@ class ClassHomeActivity : AppCompatActivity() {
             override fun onBindViewHolder(holder: ClassViewHolder, position: Int, model: Course) {
 
                 holder.bind(model)
+
+                infoText.visibility = View.GONE
+
                 holder.itemView.setOnClickListener {
 
                     val intent = Intent(this@ClassHomeActivity, ViewCourseActivity::class.java)

@@ -23,6 +23,12 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_my_classes.*
+import android.R.attr.data
+import android.app.Activity
+import android.graphics.Bitmap
+import android.util.Log.d
+import com.google.firebase.firestore.FieldValue
+import java.util.HashMap
 
 
 class MyClassesActivity : AppCompatActivity() {
@@ -43,7 +49,7 @@ class MyClassesActivity : AppCompatActivity() {
 
         //Todo: check user first if null logout the app
 
-        addFab.setOnClickListener{
+        addFab.setOnClickListener {
 
             val addScan = IntentIntegrator(this@MyClassesActivity)
             addScan.setOrientationLocked(false)
@@ -52,8 +58,14 @@ class MyClassesActivity : AppCompatActivity() {
 
         }
 
+        markButton.setOnClickListener {
 
+            val markScan = IntentIntegrator(this@MyClassesActivity)
+            markScan.setOrientationLocked(false)
+            val intent = markScan.createScanIntent()
+            startActivityForResult(intent, 6)
 
+        }
         setupRecyclerView()
 
     }
@@ -86,13 +98,14 @@ class MyClassesActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (requestCode == 5) {
+        if (resultCode != RESULT_CANCELED) {
 
             val result = IntentIntegrator.parseActivityResult(IntentIntegrator.REQUEST_CODE, resultCode, data)
 
-            if (result != null) {
+            if (requestCode == 5) {
+
                 if (result.contents == null) {
                     Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
                 } else {
@@ -100,11 +113,111 @@ class MyClassesActivity : AppCompatActivity() {
                     val courseId = result.contents
                     addToCourse(courseId)
                 }
+            }else if(requestCode == 6){
+
+                if (result.contents == null) {
+                    Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+                } else {
+
+                    val string = result.contents
+
+                    val separate1 = string.split("@_@".toRegex())
+
+
+                    val lectureId = separate1[0]
+                    val courseId = separate1[1]
+
+                    markAttendance(courseId,lectureId)
+
+                }
+
+
             }
 
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
         }
+
+    }
+
+    private fun markAttendance(courseId: String,lectureId: String){
+
+
+        val dialog = MyProgressDialog(this@MyClassesActivity)
+        dialog.setTitle("Loading...")
+        dialog.setMessage("Please wait..")
+        dialog.show()
+
+        val student = FirebaseAuth.getInstance().currentUser
+
+        val studentId = student!!.uid
+
+        val getAttendanceQuery = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.attendanceCollection).whereEqualTo("lectureId", lectureId).whereEqualTo("studentId",studentId)
+        getAttendanceQuery.get().addOnSuccessListener { it ->
+
+            val a = it.size()
+            if(a == 0){
+
+                val checkCourseEnroll = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.enrolledStudents).document(studentId)
+                checkCourseEnroll.get().addOnSuccessListener { documentSnapshot ->
+
+                    if(documentSnapshot.exists()){
+
+                        d("MY_E",documentSnapshot.id)
+
+                        val studentModel =  SessionManagement.getStudent(this@MyClassesActivity)
+
+                        val map = HashMap<String, Any?>()
+                        map["studentName"] = studentModel.studentName
+                        map["studentEnrollment"] = studentModel.enrollmentNumber
+                        map["timestamp"] = FieldValue.serverTimestamp()
+                        map["lectureId"] = lectureId
+                        map["courseId"] = courseId
+                        map["studentId"] = studentId
+
+                        mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.attendanceCollection).document().set(map).addOnSuccessListener {
+
+                            dialog.dismiss()
+                            Toast.makeText(this@MyClassesActivity, "Attendance Marked", Toast.LENGTH_SHORT).show()
+
+
+                        }.addOnFailureListener {
+
+                            dialog.dismiss()
+                            Toast.makeText(this@MyClassesActivity, "Unable to mark attendance", Toast.LENGTH_SHORT).show()
+
+                        }
+
+                    }else{
+
+                        dialog.dismiss()
+                        Toast.makeText(this@MyClassesActivity, "You don't belong to this Class", Toast.LENGTH_SHORT).show()
+
+                    }
+
+                }.addOnFailureListener {
+
+                    dialog.dismiss()
+                    Toast.makeText(this@MyClassesActivity, "Unable to fetch information", Toast.LENGTH_SHORT).show()
+
+                }
+
+
+
+            }else{
+
+                dialog.dismiss()
+                Toast.makeText(this@MyClassesActivity, "Attendance is already marked", Toast.LENGTH_SHORT).show()
+
+            }
+
+        }.addOnFailureListener {
+
+            dialog.dismiss()
+            Toast.makeText(this@MyClassesActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
+
+        }
+
+
+
 
     }
 
@@ -115,55 +228,21 @@ class MyClassesActivity : AppCompatActivity() {
             setMessage("Please wait..")
             show()
         }
-
-
-        /*
-        val courseRef = mDatabase.collection(Constants.courseCollection).document(courseId)
-
-        mDatabase.runTransaction {
-
-            val course = it.get(courseRef)
-
-            if(user != null) {
-
-                val facRef = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.enrolledStudents).document(user.uid)
-                val student = SessionManagement.getStudent(this@MyClassesActivity)
-                val studentRef = mDatabase.collection(Constants.STUDENTS_COLLECTION).document(user.uid).collection(Constants.EnrolledCourses).document(courseId)
-
-                it.set(studentRef, course)
-                it.set(facRef, student)
-
-            }else{
-                dialog.dismiss()
-                Toast.makeText(this@MyClassesActivity,"There was some error", Toast.LENGTH_SHORT).show()
-            }
-
-
-        }.addOnSuccessListener {
-            dialog.dismiss()
-            Toast.makeText(this@MyClassesActivity, "Added", Toast.LENGTH_SHORT).show()
-        }.addOnFailureListener {
-            dialog.dismiss()
-            Toast.makeText(this@MyClassesActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
-        }
-
-        */
-
         mDatabase.collection(Constants.courseCollection).document(courseId).get().addOnSuccessListener {
 
-            if(it.exists()){
+            if (it.exists()) {
                 val course = it.toObject(Course::class.java)
                 val student = SessionManagement.getStudent(this)
 
-                if (user != null && student != null && course !=null) {
+                if (user != null && student != null && course != null) {
 
                     val batch = mDatabase.batch()
 
                     val facRef = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.enrolledStudents).document(user.uid)
-                    batch.set(facRef,student)
+                    batch.set(facRef, student)
 
                     val studentRef = mDatabase.collection(Constants.STUDENTS_COLLECTION).document(user.uid).collection(Constants.EnrolledCourses).document(courseId)
-                    batch.set(studentRef,course)
+                    batch.set(studentRef, course)
 
                     batch.commit().addOnSuccessListener { _ ->
                         dialog.dismiss()
@@ -173,20 +252,18 @@ class MyClassesActivity : AppCompatActivity() {
                         Toast.makeText(this@MyClassesActivity, e.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
 
-                }else{
+                } else {
                     dialog.dismiss()
-                    Toast.makeText(this@MyClassesActivity,"There was some error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MyClassesActivity, "There was some error", Toast.LENGTH_SHORT).show()
                 }
 
             }
-
 
 
         }
 
 
     }
-
 
 
     public override fun onStart() {
@@ -200,7 +277,7 @@ class MyClassesActivity : AppCompatActivity() {
     }
 
 
-    class ClassViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class ClassViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val clsName: TextView = view.findViewById(R.id.courseName)
         private val batch: TextView = view.findViewById(R.id.courseBrief)

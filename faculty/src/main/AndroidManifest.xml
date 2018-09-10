@@ -59,13 +59,13 @@
         </activity>
         <activity android:name=".activities.NewStudents" />
         <activity android:name=".activities.VerifyStudentActivity" />
-        <activity android:name=".activities.Attendance" />
-        <activity android:name=".activities.AddModuleActivity" />
-        <activity android:name=".activities.ModulesActivity" />
         <activity android:name=".activities.ClassHomeActivity" />
         <activity android:name=".activities.AddCourseActivity" />
         <activity android:name=".activities.ViewCourseActivity" />
-        <activity android:name=".activities.ViewAttendanceActivity"></activity>
+        <activity android:name=".activities.ViewAttendanceActivity" />
+        <activity android:name=".activities.ManageStudentActivity" />
+        <activity android:name=".activities.ViewStudentActivity" />
+        <activity android:name=".activities.LectureAttendanceActivity"></activity>
     </application>
 
 </manifest>

@@ -8,6 +8,8 @@ public class Constants {
 
     public static final String EnrolledCourses = "enrolled_courses";
 
+    public static final String lectureCollection = "Lecture";
+
     public static final String NOTES_COLLECTION = "notes";
 
     public static final String SUBJECT_COLLECTION_ = "subject_list_";
@@ -15,5 +17,7 @@ public class Constants {
     public static final String STUDENTS_COLLECTION = "Students";
 
     public static final String FACULTY_COLLECTION = "Faculty";
+
+    public static final String attendanceCollection = "Attendance";
 
 }

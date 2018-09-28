@@ -8,13 +8,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.anoop.iistconnect.R;
-import com.anoop.iistconnect.fragments.RegistrationFragment1;
-import com.anoop.iistconnect.fragments.RegistrationFragment2;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,17 +40,24 @@ import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
 import in.rgpvnotes.alert.myresource.model.StudentModel;
 import in.rgpvnotes.alert.myresource.utils.Constants;
 
-public class RegisterActivity extends AppCompatActivity implements RegistrationFragment1.RegistrationFragment1Listener,RegistrationFragment2.OnSubmitListener {
+public class RegisterActivity extends AppCompatActivity{
 
     private static final String TAG = "Register_Activity";
 
+
+    //ui elements
     private CircleImageView photoView;
+    private EditText nameET;
+    private EditText emailET;
+    private EditText passET;
+    private EditText cpassET;
+    private EditText enrollmentET;
 
     private String name;
     private String email;
-    private String pass;
     private String enroll;
-    private String program;
+    private String pass;
+    private String branch;
     private String photoUrl="default";
 
     private Uri resultUri;
@@ -59,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
     private String student_id;
 
     private StudentModel model;
+
+    private boolean enrollCheck = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +85,14 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
         mAuth = FirebaseAuth.getInstance();
 
         photoView = findViewById(R.id.profile_image);
+        nameET = findViewById(R.id.nameET);
+        emailET = findViewById(R.id.emailET);
+        passET = findViewById(R.id.passET);
+        cpassET = findViewById(R.id.cpassET);
+        enrollmentET = findViewById(R.id.enrollment_no);
+
+
+
 
         photoView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,16 +108,109 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
             }
         });
 
-        RegistrationFragment1 first = RegistrationFragment1.newInstance();
+        enrollmentET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame,first, "first")
-                // Add this transaction to the back stack
-                .commit();
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
+
+                if(charSequence.length()==12){
+
+                    enroll = enrollmentET.getText().toString();
+                    branch = enroll.substring(4,6);
+                    branch = branch.toUpperCase();
+
+                    switch (branch){
+                        case "CS":enrollCheck=true;break;
+                        case "ME":enrollCheck=true;break;
+                        case "CE":enrollCheck=true;break;
+                        case "IT":enrollCheck=true;break;
+                        case "CM":enrollCheck=true;break;
+                        case "EC":enrollCheck=true;break;
+                        default: enrollCheck=false;enrollmentET.setError("Invalid enrollment");break;
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        Button nextButton = findViewById(R.id.nextButton);
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(checkInputs()){
+                    registerStudent();
+                }
+
+            }
+        });
+
+
+
 
 
 
     }
+
+    private boolean checkInputs() {
+
+        name = nameET.getText().toString();
+        email = emailET.getText().toString();
+        enroll = enrollmentET.getText().toString();
+        pass = passET.getText().toString();
+        String cpass = cpassET.getText().toString();
+
+        enroll = enroll.toUpperCase();
+
+        boolean check = true;
+
+
+        nameET.setError(null);
+        emailET.setError(null);
+        enrollmentET.setError(null);
+        passET.setError(null);
+        cpassET.setError(null);
+
+
+        if(name.length()<3 ){
+            nameET.setError("Enter valid name");
+            check = false;
+        }
+        if(email.length()<3){
+            emailET.setError("Enter valid Email");
+            check = false;
+        }
+        if(enroll.length()!=12){
+            enrollmentET.setError("Enter valid enrollment");
+            enrollCheck=false;
+        }
+
+        if (pass.length() < 6) {
+            passET.setError("password must be of minimum 6 character");
+            check = false;
+        }
+
+        if (!pass.equals(cpass)) {
+            cpassET.setError("password must be same");
+            check = false;
+        }
+
+
+        return check && enrollCheck;
+
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -118,55 +231,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
         }
     }
 
-    @Override
-    public void onSubmit(String name,String email,String pass,String enroll,String program,String branch) {
 
-        this.name = name;
-        this.email = email;
-        this.pass = pass;
-        this.enroll = enroll;
-        this.program = program;
-
-        RegistrationFragment2 second = RegistrationFragment2.newInstance(branch);
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame,second, "second")
-                // Add this transaction to the back stack
-                .addToBackStack(null)
-                .commit();
-
-    }
-
-
-    @Override
-    public void OnSubmit(String branch,String section,String semester) {
-
-        String batch_no = enroll.substring(6,8);
-
-        String batch = "20"+batch_no;
-
-        String currentYear = "";
-        switch (semester){
-
-            case "I":currentYear = "1st Year";break;
-            case "II":currentYear = "1st Year";break;
-            case "III":currentYear = "2nd Year";break;
-            case "IV":currentYear = "2nd Year";break;
-            case "V":currentYear = "3rd Year";break;
-            case "VI":currentYear = "3rd Year";break;
-            case "VII":currentYear = "4th Year";break;
-            case "VIII":currentYear = "4th Year";break;
-
-        }
-
-        char b = currentYear.charAt(0);
-
-        String classId = section+"-"+b;
-
-        model = new StudentModel(name,email,branch,photoUrl,enroll,batch,"true",section,currentYear,classId,semester,program);
-
-        registerStudent();
-    }
 
     private void registerStudent() {
 
@@ -182,6 +247,8 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
 
                 student_id = mAuth.getCurrentUser().getUid();
 
+                model = new StudentModel(name,email,branch,student_id,photoUrl,enroll);
+
                 if(resultUri!=null){
 
                     dialog.setTitle("Uploading image");
@@ -189,20 +256,25 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
 
                     final StorageReference storageReference = FirebaseStorage.getInstance().getReference("students_profile_photos").child(student_id);
 
-                    storageReference.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    UploadTask uploadTask = storageReference.putFile(resultUri);
 
-                            photoUrl = storageReference.getDownloadUrl().toString();
+                    Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                        @Override
+                        public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                            if (!task.isSuccessful()) {
+                                throw task.getException();
+                            }
+
+                            // Continue with the task to get the download URL
+                            return storageReference.getDownloadUrl();
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+
+                            photoUrl = uri.toString();
                             model.setProfileImage(photoUrl);
                             updateDetails();
-
-                        }
-                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            // TODO: 17/2/18 add image uploading progress
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -215,6 +287,7 @@ public class RegisterActivity extends AppCompatActivity implements RegistrationF
 
                         }
                     });
+
                 }else {
                     updateDetails();
                 }

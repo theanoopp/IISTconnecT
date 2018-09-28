@@ -3,19 +3,23 @@ package com.anoop.iistconnectfaculty.activities
 import `in`.rgpvnotes.alert.myresource.dialog.MyProgressDialog
 import `in`.rgpvnotes.alert.myresource.dialog.QRDialog
 import `in`.rgpvnotes.alert.myresource.model.Course
-import `in`.rgpvnotes.alert.myresource.model.Lecture
 import `in`.rgpvnotes.alert.myresource.utils.Constants
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
+import android.util.Log.d
+import android.view.LayoutInflater
 import android.widget.Toast
 import com.anoop.iistconnectfaculty.R
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_view_course.*
-import java.util.HashMap
+import kotlinx.android.synthetic.main.create_lecture_dialog.view.*
+
 
 class ViewCourseActivity : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,40 +49,68 @@ class ViewCourseActivity : AppCompatActivity() {
 
         }
 
-        takeButton.setOnClickListener { it ->
+        takeButton.setOnClickListener {
 
-            val dialog = MyProgressDialog(this@ViewCourseActivity)
-            dialog.setTitle("Loading...")
-            dialog.setMessage("Please wait..")
-            dialog.show()
+            val dialogView = LayoutInflater.from(this).inflate(R.layout.create_lecture_dialog, null)
 
-            val firestore = FirebaseFirestore.getInstance()
-            val lectureId = firestore.collection(Constants.courseCollection).document(course.courseId!!).collection(Constants.lectureCollection).document().id
+            val mBuilder = AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .setTitle("Select Time slot")
 
-            val map = HashMap<String, Any>()
-            map["lectureId"] = lectureId
-            map["courseId"] = course.courseId!!
-            map["timestamp"] = FieldValue.serverTimestamp()
-            map["facultyId"] = course.facultyId!!
+            val  mAlertDialog = mBuilder.show()
 
-            firestore.collection(Constants.courseCollection).document(course.courseId!!).collection(Constants.lectureCollection).document(lectureId).set(map).addOnSuccessListener {
+            dialogView.okButton.setOnClickListener {
 
-                dialog.dismiss()
+                val dialog = MyProgressDialog(this@ViewCourseActivity)
+                dialog.setTitle("Loading...")
+                dialog.setMessage("Please wait..")
+                dialog.show()
 
-                val string = lectureId+ "@_@" +course.courseId
+                val firestore = FirebaseFirestore.getInstance()
+                val lectureId = firestore.collection(Constants.lectureCollection).document().id
 
-                val qrDialog = QRDialog(this@ViewCourseActivity,string, "Scan this QR code to mark Attendance in " + course.courseName)
-                qrDialog.show()
+                val timeSlot = dialogView.timeSpinner.selectedItem.toString()
+                val remark = dialogView.remark.text.toString()
+                val topic = dialogView.topic.text.toString()
+
+                val map = HashMap<String, Any>()
+                map["lectureId"] = lectureId
+                map["courseId"] = course.courseId!!
+                map["timestamp"] = FieldValue.serverTimestamp()
+                map["facultyId"] = course.facultyId!!
+                map["timeSlot"] = timeSlot
+                map["remark"] = remark
+                map["topic"] = topic
+
+                d("MYE",map.toString())
+
+                firestore.collection(Constants.lectureCollection).document(lectureId).set(map).addOnSuccessListener {
+
+                    dialog.dismiss()
+                    mAlertDialog.dismiss()
+
+                    val string = lectureId+ "@_@" +course.courseId
+
+                    val qrDialog = QRDialog(this@ViewCourseActivity,string, "Scan this QR code to mark Attendance in " + course.courseName)
+                    qrDialog.show()
 
 
-            }.addOnFailureListener {
+                }.addOnFailureListener {
 
-                dialog.dismiss()
-                Toast.makeText(this@ViewCourseActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                    mAlertDialog.dismiss()
+                    Toast.makeText(this@ViewCourseActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
+
+                }
+
+
 
             }
 
-
+            dialogView.canccelButton.setOnClickListener {
+                //dismiss dialog
+                mAlertDialog.dismiss()
+            }
 
         }
 

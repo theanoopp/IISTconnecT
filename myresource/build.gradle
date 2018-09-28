@@ -1,5 +1,12 @@
 apply plugin: 'com.android.library'
 
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 27
 
@@ -59,7 +66,7 @@ dependencies {
 
     //for image loading
     implementation 'com.github.bumptech.glide:glide:4.6.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    kapt 'com.github.bumptech.glide:compiler:4.6.1'
 
     //image viewer
     implementation 'com.github.chrisbanes:PhotoView:2.1.3'

@@ -2,7 +2,9 @@ package com.anoop.iistconnect.activities
 
 import `in`.rgpvnotes.alert.myresource.dialog.MyProgressDialog
 import `in`.rgpvnotes.alert.myresource.model.Course
+import `in`.rgpvnotes.alert.myresource.model.StudentCoursesMap
 import `in`.rgpvnotes.alert.myresource.utils.Constants
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -19,21 +21,20 @@ import com.anoop.iistconnect.utils.SessionManagement
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
 import kotlinx.android.synthetic.main.activity_my_classes.*
-import android.R.attr.data
-import android.app.Activity
-import android.graphics.Bitmap
 import android.util.Log.d
+import android.widget.ProgressBar
+import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.functions.FirebaseFunctions
 import java.util.HashMap
 
 
 class MyClassesActivity : AppCompatActivity() {
 
-    private var adapter: FirestoreRecyclerAdapter<Course, ClassViewHolder>? = null
+    private var adapter: FirestoreRecyclerAdapter<StudentCoursesMap, ClassViewHolder>? = null
 
     private val mDatabase = FirebaseFirestore.getInstance()
 
@@ -49,7 +50,7 @@ class MyClassesActivity : AppCompatActivity() {
 
         //Todo: check user first if null logout the app
 
-        addFab.setOnClickListener {
+        enrollButton.setOnClickListener {
 
             val addScan = IntentIntegrator(this@MyClassesActivity)
             addScan.setOrientationLocked(false)
@@ -72,17 +73,19 @@ class MyClassesActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
 
-        val query = mDatabase.collection(Constants.STUDENTS_COLLECTION).document(user!!.uid).collection(Constants.EnrolledCourses)
+        val query = mDatabase.collection(Constants.studentCoursesMap).whereEqualTo("studentId", user!!.uid)
 
-        val response = FirestoreRecyclerOptions.Builder<Course>()
-                .setQuery(query, Course::class.java)
+        val response = FirestoreRecyclerOptions.Builder<StudentCoursesMap>()
+                .setQuery(query, StudentCoursesMap::class.java)
                 .build()
 
-        adapter = object : FirestoreRecyclerAdapter<Course, ClassViewHolder>(response) {
+        adapter = object : FirestoreRecyclerAdapter<StudentCoursesMap, ClassViewHolder>(response) {
 
-            override fun onBindViewHolder(holder: ClassViewHolder, position: Int, model: Course) {
+            override fun onBindViewHolder(holder: ClassViewHolder, position: Int, model: StudentCoursesMap) {
 
-                holder.bind(model)
+                tip.visibility = View.GONE
+
+                holder.bind(model,applicationContext)
 
             }
 
@@ -111,7 +114,23 @@ class MyClassesActivity : AppCompatActivity() {
                 } else {
 
                     val courseId = result.contents
-                    addToCourse(courseId)
+
+                    val dialog = MyProgressDialog(this@MyClassesActivity).apply {
+                        setTitle("Loading...")
+                        setMessage("Please wait..")
+                        show()
+                    }
+
+                    addToCourse(courseId).addOnSuccessListener {
+
+                        dialog.dismiss()
+                        Toast.makeText(this@MyClassesActivity,it, Toast.LENGTH_SHORT).show()
+
+                    }.addOnFailureListener {
+
+                        dialog.dismiss()
+                        Toast.makeText(this@MyClassesActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }else if(requestCode == 6){
 
@@ -127,7 +146,19 @@ class MyClassesActivity : AppCompatActivity() {
                     val lectureId = separate1[0]
                     val courseId = separate1[1]
 
-                    markAttendance(courseId,lectureId)
+                    val dialog = MyProgressDialog(this@MyClassesActivity)
+                    dialog.setTitle("Loading...")
+                    dialog.setMessage("Please wait..")
+                    dialog.show()
+
+                    markAttendance(courseId,lectureId).addOnSuccessListener {
+                        dialog.dismiss()
+                        Toast.makeText(this@MyClassesActivity, it, Toast.LENGTH_SHORT).show()
+
+                    }.addOnFailureListener {
+                        dialog.dismiss()
+                        Toast.makeText(this@MyClassesActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                    }
 
                 }
 
@@ -138,130 +169,50 @@ class MyClassesActivity : AppCompatActivity() {
 
     }
 
-    private fun markAttendance(courseId: String,lectureId: String){
+    private fun markAttendance(courseId: String,lectureId: String): Task<String> {
 
-
-        val dialog = MyProgressDialog(this@MyClassesActivity)
-        dialog.setTitle("Loading...")
-        dialog.setMessage("Please wait..")
-        dialog.show()
-
+        val mFunctions = FirebaseFunctions.getInstance()
         val student = FirebaseAuth.getInstance().currentUser
-
         val studentId = student!!.uid
 
-        val getAttendanceQuery = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.attendanceCollection).whereEqualTo("lectureId", lectureId).whereEqualTo("studentId",studentId)
-        getAttendanceQuery.get().addOnSuccessListener { it ->
+        val data = HashMap<String, Any>()
 
-            val a = it.size()
-            if(a == 0){
+        data["courseId"] = courseId
+        data["studentId"] = studentId
+        data["lectureId"] = lectureId
 
-                val checkCourseEnroll = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.enrolledStudents).document(studentId)
-                checkCourseEnroll.get().addOnSuccessListener { documentSnapshot ->
+        return mFunctions
+                .getHttpsCallable("markAttendance")
+                .call(data)
+                .continueWith { task ->
 
-                    if(documentSnapshot.exists()){
-
-                        d("MY_E",documentSnapshot.id)
-
-                        val studentModel =  SessionManagement.getStudent(this@MyClassesActivity)
-
-                        val map = HashMap<String, Any?>()
-                        map["studentName"] = studentModel.studentName
-                        map["studentEnrollment"] = studentModel.enrollmentNumber
-                        map["timestamp"] = FieldValue.serverTimestamp()
-                        map["lectureId"] = lectureId
-                        map["courseId"] = courseId
-                        map["studentId"] = studentId
-
-                        mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.attendanceCollection).document().set(map).addOnSuccessListener {
-
-                            dialog.dismiss()
-                            Toast.makeText(this@MyClassesActivity, "Attendance Marked", Toast.LENGTH_SHORT).show()
-
-
-                        }.addOnFailureListener {
-
-                            dialog.dismiss()
-                            Toast.makeText(this@MyClassesActivity, "Unable to mark attendance", Toast.LENGTH_SHORT).show()
-
-                        }
-
-                    }else{
-
-                        dialog.dismiss()
-                        Toast.makeText(this@MyClassesActivity, "You don't belong to this Class", Toast.LENGTH_SHORT).show()
-
-                    }
-
-                }.addOnFailureListener {
-
-                    dialog.dismiss()
-                    Toast.makeText(this@MyClassesActivity, "Unable to fetch information", Toast.LENGTH_SHORT).show()
+                    task.result.data as String
 
                 }
-
-
-
-            }else{
-
-                dialog.dismiss()
-                Toast.makeText(this@MyClassesActivity, "Attendance is already marked", Toast.LENGTH_SHORT).show()
-
-            }
-
-        }.addOnFailureListener {
-
-            dialog.dismiss()
-            Toast.makeText(this@MyClassesActivity, it.localizedMessage, Toast.LENGTH_SHORT).show()
-
-        }
-
-
 
 
     }
 
-    private fun addToCourse(courseId: String) {
+    private fun addToCourse(courseId: String): Task<String> {
 
-        val dialog = MyProgressDialog(this@MyClassesActivity).apply {
-            setTitle("Loading...")
-            setMessage("Please wait..")
-            show()
-        }
-        mDatabase.collection(Constants.courseCollection).document(courseId).get().addOnSuccessListener {
+        val mFunctions = FirebaseFunctions.getInstance()
 
-            if (it.exists()) {
-                val course = it.toObject(Course::class.java)
-                val student = SessionManagement.getStudent(this)
+        val data = HashMap<String, Any>()
 
-                if (user != null && student != null && course != null) {
+        data["courseId"] = courseId
+        data["studentId"] = user!!.uid
 
-                    val batch = mDatabase.batch()
+        return mFunctions
+                .getHttpsCallable("addToCourse")
+                .call(data)
+                .continueWith { task ->
+                    // This continuation runs on either success or failure, but if the task
+                    // has failed then getResult() will throw an Exception which will be
+                    // propagated down.
 
-                    val facRef = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.enrolledStudents).document(user.uid)
-                    batch.set(facRef, student)
+                    task.result.data as String
 
-                    val studentRef = mDatabase.collection(Constants.STUDENTS_COLLECTION).document(user.uid).collection(Constants.EnrolledCourses).document(courseId)
-                    batch.set(studentRef, course)
-
-                    batch.commit().addOnSuccessListener { _ ->
-                        dialog.dismiss()
-                        Toast.makeText(this@MyClassesActivity, "Added", Toast.LENGTH_SHORT).show()
-                    }.addOnFailureListener { e ->
-                        dialog.dismiss()
-                        Toast.makeText(this@MyClassesActivity, e.localizedMessage, Toast.LENGTH_SHORT).show()
-                    }
-
-                } else {
-                    dialog.dismiss()
-                    Toast.makeText(this@MyClassesActivity, "There was some error", Toast.LENGTH_SHORT).show()
                 }
-
-            }
-
-
-        }
-
 
     }
 
@@ -280,12 +231,42 @@ class MyClassesActivity : AppCompatActivity() {
     class ClassViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val clsName: TextView = view.findViewById(R.id.courseName)
-        private val batch: TextView = view.findViewById(R.id.courseBrief)
+        private val courseBrief: TextView = view.findViewById(R.id.courseBrief)
+        private val loadingBar : ProgressBar = view.findViewById(R.id.progressBar)
 
-        fun bind(course: Course) {
+        fun bind( map: StudentCoursesMap ,context: Context) {
 
-            clsName.text = course.courseName
-            batch.text = course.courseBrief
+            // TODO : it can be realtime :P
+            val database = FirebaseFirestore.getInstance()
+
+            database.collection(Constants.courseCollection).document(map.courseId!!).get().addOnSuccessListener {
+
+                if(it.exists()){
+                    loadingBar.visibility = View.GONE
+
+                    val course : Course = it.toObject(Course::class.java)!!
+
+                    clsName.text = course.courseName
+                    courseBrief.text = course.courseBrief
+
+                    clsName.visibility = View.VISIBLE
+                    courseBrief.visibility = View.VISIBLE
+                }else{
+                    loadingBar.visibility = View.GONE
+                    clsName.visibility = View.VISIBLE
+                    clsName.text = "Unable to get course info.."
+                }
+
+
+
+            }.addOnFailureListener {
+
+                loadingBar.visibility = View.GONE
+                clsName.visibility = View.VISIBLE
+                clsName.text = "Unable to get Course info.."
+                Toast.makeText(context,it.localizedMessage,Toast.LENGTH_SHORT).show()
+
+            }
 
         }
 

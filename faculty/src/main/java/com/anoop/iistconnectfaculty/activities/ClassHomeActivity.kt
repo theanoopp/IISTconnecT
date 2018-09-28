@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.anoop.iistconnectfaculty.R
 
@@ -90,13 +91,19 @@ class ClassHomeActivity : AppCompatActivity() {
 
     class ClassViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-        val clsName: TextView = view.findViewById(R.id.courseName)
-        val batch: TextView = view.findViewById(R.id.courseBrief)
+        private val clsName: TextView = view.findViewById(R.id.courseName)
+        private val courseBrief: TextView = view.findViewById(R.id.courseBrief)
+        private val loadingBar : ProgressBar = view.findViewById(R.id.progressBar)
 
         fun bind(course: Course) {
 
+            loadingBar.visibility = View.GONE
+
             clsName.text = course.courseName
-            batch.text = course.courseBrief
+            courseBrief.text = course.courseBrief
+
+            clsName.visibility = View.VISIBLE
+            courseBrief.visibility = View.VISIBLE
 
         }
 

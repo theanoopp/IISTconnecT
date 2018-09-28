@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -117,7 +116,7 @@ class LectureAttendanceActivity : AppCompatActivity() {
 
     class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
 
-        val date: TextView = view.findViewById(R.id.lecute_date)
+        val date: TextView = view.findViewById(R.id.lecuteDay)
 
         fun bind(student: StudentModel, boolean: Boolean) {
 

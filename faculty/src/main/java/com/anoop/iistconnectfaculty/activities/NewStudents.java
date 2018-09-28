@@ -75,7 +75,7 @@ public class NewStudents extends AppCompatActivity {
             public ViewHolder onCreateViewHolder(ViewGroup group, int i) {
                 // Create a new instance of the ViewHolder, in this case we are using a custom
                 // layout called R.layout.message for each item
-                View view = LayoutInflater.from(group.getContext()).inflate(R.layout.new_students_row, group, false);
+                View view = LayoutInflater.from(group.getContext()).inflate(R.layout.student_row, group, false);
                 return new ViewHolder(view);
             }
         };

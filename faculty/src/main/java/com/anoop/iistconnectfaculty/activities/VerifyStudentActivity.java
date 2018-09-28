@@ -1,6 +1,5 @@
 package com.anoop.iistconnectfaculty.activities;
 
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anoop.iistconnectfaculty.R;
@@ -44,14 +40,10 @@ public class VerifyStudentActivity extends AppCompatActivity {
     private CircleImageView photoView;
     private EditText nameET;
     private EditText enrollmentET;
-    private EditText sectionET;
-    private RadioButton BE;
-    private RadioButton BTech;
-    private RadioGroup radioGroup;
+
 
     private Spinner branchSP;
 
-    private Spinner semesterSP;
 
     private Button verifyButton;
     private Button deleteButton;
@@ -60,13 +52,9 @@ public class VerifyStudentActivity extends AppCompatActivity {
     private String name;
     private String email;
     private String enroll;
-    private String program;
 
     private String branch;
-    private String section;
-    private String semester;
 
-    private String currentYear;
     private String photoUrl;
 
     private FirebaseFunctions mFunctions;
@@ -90,26 +78,20 @@ public class VerifyStudentActivity extends AppCompatActivity {
         //editTexts
         nameET = findViewById(R.id.nameET);
         enrollmentET = findViewById(R.id.enrollment_no);
-        sectionET = findViewById(R.id.inputSection);
 
-        BE = findViewById(R.id.radioBE);
-        BTech = findViewById(R.id.radioBTech);
-        radioGroup = findViewById(R.id.radioGroup);
+
 
         branchSP = findViewById(R.id.spinnerBranch);
-        semesterSP = findViewById(R.id.spinnerSemester);
 
         verifyButton = findViewById(R.id.verify_button);
         deleteButton = findViewById(R.id.delete_button);
 
         nameET.setText(model.getStudentName());
         enrollmentET.setText(model.getEnrollmentNumber());
-        sectionET.setText(model.getSection());
+
 
         branch = model.getStudentBranch();
-        semester = model.getCurrentSemester();
         photoUrl = model.getProfileImage();
-        program = model.getProgram();
         email = model.getStudentEmail();
 
         switch (branch){
@@ -121,20 +103,6 @@ public class VerifyStudentActivity extends AppCompatActivity {
             case "EC": branchSP.setSelection(5);break;
         }
 
-
-        currentYear = "";
-        switch (semester){
-
-            case "I":currentYear = "1st Year";semesterSP.setSelection(1);break;
-            case "II":currentYear = "1st Year";semesterSP.setSelection(2);break;
-            case "III":currentYear = "2nd Year";semesterSP.setSelection(3);break;
-            case "IV":currentYear = "2nd Year";semesterSP.setSelection(4);break;
-            case "V":currentYear = "3rd Year";semesterSP.setSelection(5);break;
-            case "VI":currentYear = "3rd Year";semesterSP.setSelection(6);break;
-            case "VII":currentYear = "4th Year";semesterSP.setSelection(7);break;
-            case "VIII":currentYear = "4th Year";semesterSP.setSelection(8);break;
-
-        }
 
         branchSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -158,24 +126,11 @@ public class VerifyStudentActivity extends AppCompatActivity {
         });
 
 
-        if(program.equals("BE")){
-            BE.setChecked(true);
-        }else {
-            BTech.setChecked(true);
-        }
-
         verifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(checkInputs()){
-
-                    int id = radioGroup.getCheckedRadioButtonId();
-                    if(id == R.id.radioBE ){
-                        program = "BE";
-                    }else {
-                        program = "B.Tech";
-                    }
 
                     verifyStudent();
 
@@ -229,28 +184,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
 
     private void verifyStudent() {
 
-        String batch_no = enroll.substring(6,8);
-
-        String batch = "20"+batch_no;
-
-        switch (semester){
-
-            case "I":currentYear = "1st Year";break;
-            case "II":currentYear = "1st Year";break;
-            case "III":currentYear = "2nd Year";break;
-            case "IV":currentYear = "2nd Year";break;
-            case "V":currentYear = "3rd Year";break;
-            case "VI":currentYear = "3rd Year";break;
-            case "VII":currentYear = "4th Year";break;
-            case "VIII":currentYear = "4th Year";break;
-
-        }
-
-        char b = currentYear.charAt(0);
-
-        String classId = section+"-"+b;
-
-        model = new StudentModel(name,email,branch,photoUrl,enroll,batch,"true",section,currentYear,classId,semester,program);
+        model = new StudentModel(name,email,branch,studentId,photoUrl,enroll);
 
         dialog.setTitle("Loading");
         dialog.setMessage("Please wait...");
@@ -287,19 +221,15 @@ public class VerifyStudentActivity extends AppCompatActivity {
 
         name = nameET.getText().toString();
         enroll = enrollmentET.getText().toString();
-        section = sectionET.getText().toString();
 
-        section = section.toUpperCase();
+
 
         enroll = enroll.toUpperCase();
 
-        semester = semesterSP.getSelectedItem().toString();
-        TextView semErrorText = (TextView)semesterSP.getSelectedView();
 
 
-        boolean n = true, e = true, sec = true, sem = true;
+        boolean n = true, e = true;
 
-        sectionET.setError(null);
         nameET.setError(null);
         enrollmentET.setError(null);
 
@@ -312,23 +242,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
             e=false;
         }
 
-        if(section.length() != 3){
-
-            sectionET.setError("Invalid section");
-            sec=false;
-
-        }
-
-        if(semester.equals("Select Semester")){
-
-            semErrorText.setError("");
-            semErrorText.setTextColor(Color.RED);//just to highlight that this is an error
-            semErrorText.setText("None selected");//changes the selected item text to this
-            sem=false;
-
-        }
-
-        return sem && sec && n && e;
+        return n && e;
 
     }
 

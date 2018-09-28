@@ -4,6 +4,7 @@ import `in`.rgpvnotes.alert.myresource.R
 import android.app.AlertDialog
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 
 import com.google.zxing.BarcodeFormat

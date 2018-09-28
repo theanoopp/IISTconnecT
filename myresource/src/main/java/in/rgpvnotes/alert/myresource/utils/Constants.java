@@ -6,8 +6,6 @@ public class Constants {
 
     public static final String enrolledStudents = "enrolled_students";
 
-    public static final String EnrolledCourses = "enrolled_courses";
-
     public static final String lectureCollection = "Lecture";
 
     public static final String NOTES_COLLECTION = "notes";
@@ -19,5 +17,7 @@ public class Constants {
     public static final String FACULTY_COLLECTION = "Faculty";
 
     public static final String attendanceCollection = "Attendance";
+
+    public static final String studentCoursesMap = "Student_Courses_Map";
 
 }

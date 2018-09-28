@@ -65,7 +65,8 @@
         <activity android:name=".activities.ViewAttendanceActivity" />
         <activity android:name=".activities.ManageStudentActivity" />
         <activity android:name=".activities.ViewStudentActivity" />
-        <activity android:name=".activities.LectureAttendanceActivity"></activity>
+        <activity android:name=".activities.LectureAttendanceActivity" />
+        <activity android:name=".activities.ViewLecture"></activity>
     </application>
 
 </manifest>

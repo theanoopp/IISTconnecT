@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.anoop.iistconnectfaculty.R
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -42,7 +41,7 @@ class ViewAttendanceActivity : AppCompatActivity() {
 
         val courseId = intent.getStringExtra("courseId")
 
-        val query = mDatabase.collection(Constants.courseCollection).document(courseId).collection(Constants.lectureCollection)
+        val query = mDatabase.collection(Constants.lectureCollection).whereEqualTo("courseId",courseId)//.orderBy("timestamp", Query.Direction.DESCENDING)
 
         val response = FirestoreRecyclerOptions.Builder<Lecture>()
                 .setQuery(query, Lecture::class.java)
@@ -56,7 +55,7 @@ class ViewAttendanceActivity : AppCompatActivity() {
 
                 holder.itemView.setOnClickListener {
 
-                    val intent = Intent(this@ViewAttendanceActivity, LectureAttendanceActivity::class.java)
+                    val intent = Intent(this@ViewAttendanceActivity, ViewLecture::class.java)
                     intent.putExtra("lecture", model)
                     startActivity(intent)
                 }
@@ -78,14 +77,34 @@ class ViewAttendanceActivity : AppCompatActivity() {
 
     class LectureViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
-        val date: TextView = view.findViewById(R.id.lecute_date)
+        private val dayView: TextView = view.findViewById(R.id.lecute_day)
+        private val dateView: TextView = view.findViewById(R.id.lecute_date)
+        private val topicView: TextView = view.findViewById(R.id.lecute_topic)
+        private val remarkView: TextView = view.findViewById(R.id.lecute_remark)
 
         fun bind( lecture: Lecture) {
 
-            val simpleDateFormat = SimpleDateFormat("EEEE : dd/MM/yyyy")
+            val dayFormat = SimpleDateFormat("EEEE")
+            val day = dayFormat.format(lecture.timestamp)
+            dayView.text = day
 
-            val time = simpleDateFormat.format(lecture.timestamp)
-            date.text = time
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+
+            val date = dateFormat.format(lecture.timestamp)
+            dateView.text = date
+
+            if(lecture.topic != ""){
+
+                topicView.visibility = View.VISIBLE
+                topicView.text = lecture.topic
+
+            }
+            if(lecture.remark != ""){
+
+                remarkView.visibility = View.VISIBLE
+                remarkView.text = lecture.remark
+
+            }
 
         }
 

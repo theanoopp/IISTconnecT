@@ -131,10 +131,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                         SessionManagement.saveStudent(HomeActivity.this,studentModel);
 
-                        if(studentModel.getVerified().equals("false")){
-                            startActivity(new Intent(HomeActivity.this,AccountNotVerifiedActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK ));
-                        }
-
                         userSessionEdit = sharedPreferences.edit();
                         userSessionEdit.putString("username", studentModel.getStudentName());
                         userSessionEdit.putString("useremail", studentModel.getStudentEmail());
@@ -218,11 +214,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if(id == R.id.nav_logout){
 
             mAuth.signOut();
-
-            char b = studentModel.getCurrentYear().charAt(0);
-            String section = studentModel.getSection()+"-"+b;
-            FirebaseMessaging.getInstance().unsubscribeFromTopic(section);
-
             startActivity(new Intent(HomeActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK ));
             finish();
 
@@ -239,25 +230,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if(view.getId()==R.id.b_assignments){
 
             Intent intent = new Intent(HomeActivity.this, AllAssignments.class);
-
-            char b = studentModel.getCurrentYear().charAt(0);
-            String section = studentModel.getSection()+"-"+b;
-
-            intent.putExtra("section",section);
-
             startActivity(intent);
 
         }else if(view.getId()==R.id.b_timetable){
 
             Intent intent = new Intent(HomeActivity.this, StudentTimetable.class);
-
-            char b = studentModel.getCurrentYear().charAt(0);
-            String section = studentModel.getSection()+"-"+b;
-
-            intent.putExtra("section",section);
-            intent.putExtra("branch",studentModel.getStudentBranch());
-            intent.putExtra("sem",studentModel.getCurrentSemester());
-
             startActivity(intent);
 
         }else if(view.getId()==R.id.b_notes){
@@ -267,11 +244,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else if(view.getId()==R.id.b_syllabus){
 
             Intent intent = new Intent(HomeActivity.this, SyllabusActivity.class);
-
-            intent.putExtra("branch",studentModel.getStudentBranch());
-            intent.putExtra("sem",studentModel.getCurrentSemester());
-            intent.putExtra("program",studentModel.getProgram());
-
             startActivity(intent);
 
         }

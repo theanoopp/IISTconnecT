@@ -1,7 +1,7 @@
 package com.anoop.iistconnectfaculty.activities;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.model.Student;
 import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class VerifyStudentActivity extends AppCompatActivity {
@@ -33,7 +33,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
     private android.app.AlertDialog dialog ;
 
     private String studentId;
-    private StudentModel model;
+    private Student model;
 
 
     //views
@@ -71,7 +71,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
         dialog = new MyProgressDialog(this);
 
         studentId = getIntent().getStringExtra("studentId");
-        model = (StudentModel) getIntent().getSerializableExtra("model");
+        model = (Student) getIntent().getSerializableExtra("model");
 
         photoView = findViewById(R.id.profile_image);
 
@@ -184,7 +184,7 @@ public class VerifyStudentActivity extends AppCompatActivity {
 
     private void verifyStudent() {
 
-        model = new StudentModel(name,email,branch,studentId,photoUrl,enroll);
+        model = new Student(name,email,branch,studentId,photoUrl,enroll);
 
         dialog.setTitle("Loading");
         dialog.setMessage("Please wait...");

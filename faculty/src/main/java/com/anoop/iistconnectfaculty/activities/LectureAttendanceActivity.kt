@@ -2,13 +2,13 @@ package com.anoop.iistconnectfaculty.activities
 
 import `in`.rgpvnotes.alert.myresource.model.Attendance
 import `in`.rgpvnotes.alert.myresource.model.Lecture
-import `in`.rgpvnotes.alert.myresource.model.StudentModel
+import `in`.rgpvnotes.alert.myresource.model.Student
 import `in`.rgpvnotes.alert.myresource.utils.Constants
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_lecture_attendance.*
 
 class LectureAttendanceActivity : AppCompatActivity() {
 
-    private var adapter: FirestoreRecyclerAdapter<StudentModel, ViewHolder>? = null
+    private var adapter: FirestoreRecyclerAdapter<Student, ViewHolder>? = null
 
     private val mDatabase = FirebaseFirestore.getInstance()
 
@@ -71,24 +71,22 @@ class LectureAttendanceActivity : AppCompatActivity() {
 
         val query = mDatabase.collection(Constants.courseCollection).document(lecture!!.courseId!!).collection(Constants.enrolledStudents)
 
-        val response = FirestoreRecyclerOptions.Builder<StudentModel>()
-                .setQuery(query, StudentModel::class.java)
+        val response = FirestoreRecyclerOptions.Builder<Student>()
+                .setQuery(query, Student::class.java)
                 .build()
 
-        adapter = object : FirestoreRecyclerAdapter<StudentModel, ViewHolder>(response) {
+        adapter = object : FirestoreRecyclerAdapter<Student, ViewHolder>(response) {
 
-            override fun onBindViewHolder(holder: ViewHolder, position: Int, model: StudentModel) {
+            override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Student) {
 
                 val attendance = Attendance()
 
-                attendance.studentEnrollment = model.enrollmentNumber
+                attendance.studentId = model.enrollmentNumber
 
                 val boolean = list.contains(attendance)
                 holder.bind(model,boolean)
 
                 holder.itemView.setOnClickListener {
-
-                    Toast.makeText(this@LectureAttendanceActivity,"todo work",Toast.LENGTH_SHORT).show()
 
                 }
 
@@ -118,7 +116,7 @@ class LectureAttendanceActivity : AppCompatActivity() {
 
         val date: TextView = view.findViewById(R.id.lecuteDay)
 
-        fun bind(student: StudentModel, boolean: Boolean) {
+        fun bind(student: Student, boolean: Boolean) {
 
             if(boolean){
                 date.text = student.studentName + " was present"

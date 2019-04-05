@@ -1,8 +1,8 @@
 package com.anoop.iistconnectfaculty.activities
 
-import `in`.rgpvnotes.alert.myresource.model.StudentModel
+import `in`.rgpvnotes.alert.myresource.model.Student
 import `in`.rgpvnotes.alert.myresource.utils.Constants
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.anoop.iistconnectfaculty.R
@@ -21,7 +21,7 @@ class ViewStudentActivity : AppCompatActivity() {
 
         database.collection(Constants.STUDENTS_COLLECTION).document(studentId).get().addOnSuccessListener {
 
-            val student : StudentModel = it.toObject(StudentModel::class.java)!!
+            val student : Student = it.toObject(Student::class.java)!!
             studentName.text = student.studentName
             studentEnroll.text = student.enrollmentNumber
 

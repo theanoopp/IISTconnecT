@@ -1,10 +1,10 @@
 package in.rgpvnotes.alert.myresource.activities;
 
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
 import in.rgpvnotes.alert.myresource.R;
-import in.rgpvnotes.alert.myresource.models.subject.SingleSubject;
 import in.rgpvnotes.alert.myresource.models.subject.SingleUnit;
 
 public class ViewSyllabusActivity extends AppCompatActivity {

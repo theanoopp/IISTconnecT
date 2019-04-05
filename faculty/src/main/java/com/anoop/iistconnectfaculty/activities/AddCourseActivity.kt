@@ -3,8 +3,8 @@ package com.anoop.iistconnectfaculty.activities
 import `in`.rgpvnotes.alert.myresource.dialog.MyProgressDialog
 import `in`.rgpvnotes.alert.myresource.model.Course
 import `in`.rgpvnotes.alert.myresource.utils.Constants
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
 import com.anoop.iistconnectfaculty.R
 import com.google.firebase.auth.FirebaseAuth
@@ -13,30 +13,29 @@ import kotlinx.android.synthetic.main.activity_add_course.*
 
 class AddCourseActivity : AppCompatActivity() {
 
-    private var dialog: MyProgressDialog? = null
+    private val dialog by lazy { MyProgressDialog(this@AddCourseActivity) }
 
-    private var courseName : String = ""
+    private lateinit var courseName: String
 
-    private var courseBrief : String = ""
+    private lateinit var courseBrief: String
 
-    private var classLocation : String = ""
+    private lateinit var classLocation: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_course)
 
-        dialog = MyProgressDialog(this@AddCourseActivity)
 
-        submitCourse.setOnClickListener{ _ ->
+        submitCourse.setOnClickListener {
 
-            if(checkInput()){
+            if (checkInput()) {
 
-                dialog!!.setTitle("Please wait...")
-                dialog!!.setMessage("Creating...")
-                dialog!!.setCancelable(false)
+                dialog.setTitle("Please wait...")
+                dialog.setMessage("Creating...")
+                dialog.setCancelable(false)
 
-                dialog!!.show()
+                dialog.show()
 
                 submitCourse.isEnabled = false
 
@@ -52,9 +51,9 @@ class AddCourseActivity : AppCompatActivity() {
                 database.collection(Constants.courseCollection).document(courseId).set(course).addOnSuccessListener {
                     Toast.makeText(this@AddCourseActivity, "New Course added", Toast.LENGTH_SHORT).show()
                     finish()
-                    dialog!!.dismiss()
+                    dialog.dismiss()
                 }.addOnFailureListener { e ->
-                    dialog!!.dismiss()
+                    dialog.dismiss()
                     Toast.makeText(this@AddCourseActivity, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
 
@@ -62,12 +61,7 @@ class AddCourseActivity : AppCompatActivity() {
             }
 
 
-
         }
-
-
-
-
 
 
     }
@@ -105,7 +99,6 @@ class AddCourseActivity : AppCompatActivity() {
 
         return result
     }
-
 
 
 }

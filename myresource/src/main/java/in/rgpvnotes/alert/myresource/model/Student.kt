@@ -2,7 +2,7 @@ package `in`.rgpvnotes.alert.myresource.model
 
 import java.io.Serializable
 
-data class StudentModel(
+data class Student(
 
         var studentName: String? = null,
         var studentEmail: String? = null,

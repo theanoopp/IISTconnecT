@@ -5,16 +5,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.CardView;
+import androidx.appcompat.app.ActionBar;
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,10 +31,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import in.rgpvnotes.alert.myresource.activities.GalleryActivity;
-import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.model.Student;
 import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
@@ -42,7 +41,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
     private FirebaseFirestore mDatabase ;
-    private StudentModel studentModel;
+    private Student student;
 
     private TextView nameT,enrollmentT;
     private ImageView photoView;
@@ -127,24 +126,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
                     if (documentSnapshot.exists()) {
 
-                        studentModel = documentSnapshot.toObject(StudentModel.class);
+                        student = documentSnapshot.toObject(Student.class);
 
-                        SessionManagement.saveStudent(HomeActivity.this,studentModel);
+                        SessionManagement.saveStudent(HomeActivity.this, student);
 
                         userSessionEdit = sharedPreferences.edit();
-                        userSessionEdit.putString("username", studentModel.getStudentName());
-                        userSessionEdit.putString("useremail", studentModel.getStudentEmail());
+                        userSessionEdit.putString("username", student.getStudentName());
+                        userSessionEdit.putString("useremail", student.getStudentEmail());
                         userSessionEdit.apply();
 
-                        nameT.setText(studentModel.getStudentName());
-                        enrollmentT.setText(studentModel.getEnrollmentNumber());
+                        nameT.setText(student.getStudentName());
+                        enrollmentT.setText(student.getEnrollmentNumber());
 
-                        headName.setText(studentModel.getStudentName());
-                        headEmail.setText(studentModel.getStudentEmail());
+                        headName.setText(student.getStudentName());
+                        headEmail.setText(student.getStudentEmail());
 
-                        String image = studentModel.getProfileImage();
+                        String image = student.getProfileImage();
 
-                        switch (studentModel.getStudentBranch()){
+                        switch (student.getStudentBranch()){
 
                             case "CS" : headImage.setImageResource(R.drawable.cse_img);break;
                             case "ME" : headImage.setImageResource(R.drawable.mech_img);break;

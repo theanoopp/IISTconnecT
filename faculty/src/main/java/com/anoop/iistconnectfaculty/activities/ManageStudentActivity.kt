@@ -1,16 +1,16 @@
 package com.anoop.iistconnectfaculty.activities
 
 import `in`.rgpvnotes.alert.myresource.model.StudentCoursesMap
-import `in`.rgpvnotes.alert.myresource.model.StudentModel
+import `in`.rgpvnotes.alert.myresource.model.Student
 import `in`.rgpvnotes.alert.myresource.utils.Constants
 import `in`.rgpvnotes.alert.myresource.utils.GlideApp
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_manage_student.*
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -168,7 +168,7 @@ class ManageStudentActivity : AppCompatActivity() {
 
             database.collection(Constants.STUDENTS_COLLECTION).document(map.studentId!!).get().addOnSuccessListener {
 
-                val student : StudentModel = it.toObject(StudentModel::class.java)!!
+                val student : Student = it.toObject(Student::class.java)!!
                 studentName.text = student.studentName
                 studentEnroll.text = student.enrollmentNumber
 

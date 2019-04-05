@@ -11,9 +11,10 @@ data class Lecture(
         var facultyId: String? = null,
         val timeSlot : String? = null,
         val remark : String? = null,
-        val topic :  String ? = null
+        val topic :  String ? = null,
+        val active : Boolean = false
 
 ): Serializable {
 
-    constructor() : this(null,null,null,null,null,null,null)
+    constructor() : this(null,null,null,null,null,null,null,false)
 }

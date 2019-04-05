@@ -5,13 +5,13 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 
-import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.model.Student;
 
 import static android.content.Context.MODE_PRIVATE;
 
 public class SessionManagement {
 
-    public static void saveStudent(Context context,StudentModel student){
+    public static void saveStudent(Context context, Student student){
 
         String PREF_NAME = "Student";
 
@@ -25,7 +25,7 @@ public class SessionManagement {
 
     }
 
-    public static StudentModel getStudent(Context context){
+    public static Student getStudent(Context context){
 
         String PREF_NAME = "Student";
 
@@ -33,7 +33,7 @@ public class SessionManagement {
 
         Gson gson = new Gson();
         String json = pref.getString("MyObject", "");
-        return gson.fromJson(json, StudentModel.class);
+        return gson.fromJson(json, Student.class);
 
     }
 

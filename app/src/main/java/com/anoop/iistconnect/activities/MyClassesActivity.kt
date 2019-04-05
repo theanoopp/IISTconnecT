@@ -6,33 +6,30 @@ import `in`.rgpvnotes.alert.myresource.model.StudentCoursesMap
 import `in`.rgpvnotes.alert.myresource.utils.Constants
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.anoop.iistconnect.R
-import com.anoop.iistconnect.utils.SessionManagement
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.zxing.integration.android.IntentIntegrator
-import kotlinx.android.synthetic.main.activity_my_classes.*
-import android.util.Log.d
 import android.widget.ProgressBar
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.functions.FirebaseFunctions
+import kotlinx.android.synthetic.main.activity_my_classes.*
 import java.util.HashMap
 
 
-class MyClassesActivity : AppCompatActivity() {
+class MyClassesActivity : AppCompatActivity(){
 
     private var adapter: FirestoreRecyclerAdapter<StudentCoursesMap, ClassViewHolder>? = null
 
@@ -186,7 +183,7 @@ class MyClassesActivity : AppCompatActivity() {
                 .call(data)
                 .continueWith { task ->
 
-                    task.result.data as String
+                    task.result!!.data as String
 
                 }
 
@@ -210,7 +207,7 @@ class MyClassesActivity : AppCompatActivity() {
                     // has failed then getResult() will throw an Exception which will be
                     // propagated down.
 
-                    task.result.data as String
+                    task.result!!.data as String
 
                 }
 

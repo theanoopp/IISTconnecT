@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.SemesterFragment">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/I_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -28,9 +28,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/II_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -53,9 +53,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
     android:id="@+id/III_sem"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -78,9 +78,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/IV_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -103,9 +103,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/V_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -128,9 +128,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/VI_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -153,9 +153,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/VII_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -178,9 +178,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/VIII_sem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -203,9 +203,9 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

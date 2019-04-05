@@ -1,10 +1,10 @@
 package com.anoop.iistconnectfaculty.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.model.Student;
 import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class NewStudents extends AppCompatActivity {
@@ -44,15 +44,15 @@ public class NewStudents extends AppCompatActivity {
 
         Query query = FirebaseFirestore.getInstance().collection(Constants.STUDENTS_COLLECTION).whereEqualTo("verified","false");
 
-        FirestoreRecyclerOptions<StudentModel> options = new FirestoreRecyclerOptions.Builder<StudentModel>()
+        FirestoreRecyclerOptions<Student> options = new FirestoreRecyclerOptions.Builder<Student>()
                 .setLifecycleOwner(this)
-                .setQuery(query, StudentModel.class)
+                .setQuery(query, Student.class)
                 .build();
 
 
-        FirestoreRecyclerAdapter mClassAdapter = new FirestoreRecyclerAdapter<StudentModel, ViewHolder>(options) {
+        FirestoreRecyclerAdapter mClassAdapter = new FirestoreRecyclerAdapter<Student, ViewHolder>(options) {
             @Override
-            public void onBindViewHolder(ViewHolder holder, int position, final StudentModel model) {
+            public void onBindViewHolder(ViewHolder holder, int position, final Student model) {
 
                 holder.bind(model);
 
@@ -100,7 +100,7 @@ public class NewStudents extends AppCompatActivity {
             imageView = itemView.findViewById(R.id.student_row_photo);
         }
 
-        public void bind(StudentModel model){
+        public void bind(Student model){
 
             studentName.setText(model.getStudentName());
             studentEnrollment.setText(model.getEnrollmentNumber());

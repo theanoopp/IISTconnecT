@@ -5,9 +5,9 @@ import `in`.rgpvnotes.alert.myresource.dialog.QRDialog
 import `in`.rgpvnotes.alert.myresource.model.Course
 import `in`.rgpvnotes.alert.myresource.utils.Constants
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.util.Log.d
 import android.view.LayoutInflater
 import android.widget.Toast
@@ -81,6 +81,7 @@ class ViewCourseActivity : AppCompatActivity() {
                 map["timeSlot"] = timeSlot
                 map["remark"] = remark
                 map["topic"] = topic
+                map["active"] = true
 
                 d("MYE",map.toString())
 

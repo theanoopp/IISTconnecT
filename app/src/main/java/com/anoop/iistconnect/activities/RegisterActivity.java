@@ -5,9 +5,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,7 +29,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
@@ -37,7 +36,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.rgpvnotes.alert.myresource.dialog.MyProgressDialog;
-import in.rgpvnotes.alert.myresource.model.StudentModel;
+import in.rgpvnotes.alert.myresource.model.Student;
 import in.rgpvnotes.alert.myresource.utils.Constants;
 
 public class RegisterActivity extends AppCompatActivity{
@@ -68,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity{
 
     private String student_id;
 
-    private StudentModel model;
+    private Student model;
 
     private boolean enrollCheck = true;
 
@@ -247,7 +246,7 @@ public class RegisterActivity extends AppCompatActivity{
 
                 student_id = mAuth.getCurrentUser().getUid();
 
-                model = new StudentModel(name,email,branch,student_id,photoUrl,enroll);
+                model = new Student(name,email,branch,student_id,photoUrl,enroll);
 
                 if(resultUri!=null){
 
